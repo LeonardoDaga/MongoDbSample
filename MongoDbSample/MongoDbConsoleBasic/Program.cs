@@ -92,6 +92,7 @@ namespace MongoDbConsoleBasic
             var user = collection.AsQueryable()
                 .SingleOrDefault(p => p.UserId == userID);
 
+            // If the user does not exist, create a new one
             bool newUser = false;
             if (user == null)
             {
