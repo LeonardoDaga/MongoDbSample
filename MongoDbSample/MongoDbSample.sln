@@ -3,9 +3,18 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29728.190
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MongoDbConsoleBasic", "MongoDbConsoleBasic\MongoDbConsoleBasic.csproj", "{29AE5E67-CA70-4079-907D-956826693579}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MongoDbConsoleBasic", "MongoDbConsoleBasic\MongoDbConsoleBasic.csproj", "{29AE5E67-CA70-4079-907D-956826693579}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MongoDbConsoleEfficiencyTest", "MongoDbConsoleEfficiencyTest\MongoDbConsoleEfficiencyTest.csproj", "{AA95E350-1EAB-4548-827A-9F5F0C56842A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MongoDbConsoleEfficiencyTestBasic", "MongoDbConsoleEfficiencyTestBasic\MongoDbConsoleEfficiencyTestBasic.csproj", "{AA95E350-1EAB-4548-827A-9F5F0C56842A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{86B5B09B-8145-43A8-947A-02CA254B41CE}"
+	ProjectSection(SolutionItems) = preProject
+		..\README.md = ..\README.md
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MongoDbConsoleUpsert", "MongoDbConsoleUpsert\MongoDbConsoleUpsert.csproj", "{42D90546-EA85-4AFC-8C9F-4EC5FE841B28}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MongoDbConsoleEfficiencyTestUpsert", "MongoDbConsoleEfficiencyTestUpsert\MongoDbConsoleEfficiencyTestUpsert.csproj", "{6D9EAC27-CE58-40CE-9587-F2F2F9BC5643}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +30,14 @@ Global
 		{AA95E350-1EAB-4548-827A-9F5F0C56842A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AA95E350-1EAB-4548-827A-9F5F0C56842A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AA95E350-1EAB-4548-827A-9F5F0C56842A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{42D90546-EA85-4AFC-8C9F-4EC5FE841B28}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42D90546-EA85-4AFC-8C9F-4EC5FE841B28}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42D90546-EA85-4AFC-8C9F-4EC5FE841B28}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42D90546-EA85-4AFC-8C9F-4EC5FE841B28}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D9EAC27-CE58-40CE-9587-F2F2F9BC5643}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D9EAC27-CE58-40CE-9587-F2F2F9BC5643}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D9EAC27-CE58-40CE-9587-F2F2F9BC5643}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D9EAC27-CE58-40CE-9587-F2F2F9BC5643}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
