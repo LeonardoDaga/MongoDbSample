@@ -80,11 +80,11 @@ namespace MongoDbConsoleBasic
                 Position = dataPosStr
             };
 
-            // get a mongoclient using the default connection string
-            var mongo = new MongoClient();
+            // get a mongoclient using the connection string
+            var mongo = new MongoClient("mongodb://ruserTest:12345678@localhost/UserPositionsDb");
 
             // get (and create if doesn't exist) a database from the mongoclient
-            var db = mongo.GetDatabase("UserPositionsDb");
+            var db = mongo.GetDatabase("FmpMongoDb");
 
             // get a collection of User (and create if it doesn't exist)
             var collection = db.GetCollection<User>("UserCollection");

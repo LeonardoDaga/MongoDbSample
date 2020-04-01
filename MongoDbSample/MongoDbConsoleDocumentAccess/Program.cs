@@ -60,49 +60,74 @@ namespace MongoDbConsoleBasic
             // get a collection of User (and create if it doesn't exist)
             var collection = db.GetCollection<User>("UserCollection");
 
+            var resultString = "";
+
             // Random positions generator
             Random rand = new Random(DateTime.Now.Second);
 
             Stopwatch sw = new Stopwatch();
 
-            bool upsert = true;
+            sw.Reset();
 
-            // Increase the day number to simulate the daily update for many users
-            // to check how the record addition slows the db when the records number grows
-            for (int day = 0; day < 100; day++)
+            var SolutionToApply = 4;
+            double average = 0;
+
+            // Loop for 16*12 users data update
+            for (int n = 0; n < 100; n++)
             {
-                List<WriteModel<User>> _listBulkUserWrites = new List<WriteModel<User>>();
-
                 sw.Reset();
-                sw.Start();
-
-                // Loop for 16*12 users data update
                 for (int userID = 1000; userID < 1000 + 16 * 12; userID++)
                 {
-                    // Add the new record to the document
-                    var positionItem = new PositionItem
+                    sw.Start();
+
+                    IEnumerable<PositionItem> lastTwoDaysPositions = null;
+
+                    switch (SolutionToApply)
                     {
-                        Position = (41 + rand.NextDouble() * 2).ToString() + "," + (11 + rand.NextDouble() * 2).ToString(),
-                        PositionDate = day
-                    };
+                        case 1:
+                            lastTwoDaysPositions = collection.AsQueryable()
+                                .Where(p => p.UserId == userID)
+                                .Select(p => p.UserPositions.Take(-2))
+                                .SingleOrDefault();
+                            break;
+                        case 2:
+                            lastTwoDaysPositions = (from t in collection.AsQueryable()
+                                                        where t.UserId == userID
+                                                        select t.UserPositions.Take(-2))
+                                                       .SingleOrDefault();
+                            break;
+                        case 3:
+                            lastTwoDaysPositions = collection.AsQueryable()
+                                .SingleOrDefault(p => p.UserId == userID)
+                                .UserPositions
+                                .TakeLast(2);
+                            break;
+                        case 4:
+                            var playerDoc = collection.AsQueryable()
+                                .SingleOrDefault(p => p.UserId == userID);
 
-                    var updateUserFilter = Builders<User>.Filter.Eq(u => u.UserId, userID);
-                    var updateUserDefinition = Builders<User>.Update.Push(u => u.UserPositions, positionItem);
+                            lastTwoDaysPositions = playerDoc.UserPositions
+                                .TakeLast(2);
+                            break;
+                    }
 
-                    _listBulkUserWrites.Add(new UpdateOneModel<User>(updateUserFilter,
-                                updateUserDefinition)
-                    { IsUpsert = upsert }
+                    sw.Stop();
 
-                    );
+                    // Create a silly operation to perform to avoid any optimization issue
+                    resultString = "";
+                    foreach (var position in lastTwoDaysPositions)
+                    {
+                        resultString += position.Position + ";";
+                    }
                 }
 
-                if (_listBulkUserWrites.Count > 0)
-                    collection.BulkWriteAsync(_listBulkUserWrites);
-
                 sw.Stop();
-
                 Console.WriteLine("Elapsed Time = {0}ms", sw.Elapsed.TotalMilliseconds);
+                average += sw.Elapsed.TotalMilliseconds;
             }
+
+            Console.WriteLine("Solution {0}, Debug String = {1}", SolutionToApply, resultString);
+            Console.WriteLine("Average = {0}", average/100);
         }
     }
 }

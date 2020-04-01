@@ -52,7 +52,7 @@ namespace MongoDbConsoleBasic
         static void Main(string[] args)
         {
             // get a mongoclient using the default connection string
-            var mongo = new MongoClient();
+            var mongo = new MongoClient("mongodb://ruserTest:12345678@localhost/UserPositionsDb");
 
             // get (and create if doesn't exist) a database from the mongoclient
             var db = mongo.GetDatabase("UserPositionsDb");
